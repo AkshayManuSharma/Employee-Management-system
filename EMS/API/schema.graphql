@@ -1,0 +1,59 @@
+scalar GraphqlDate,
+enum Title{
+    Employee,
+    Manager,
+    Director,
+    VP
+}
+enum Department{
+    IT,
+    Marketing,
+    Engineering,
+    HR
+}
+enum EmployeeType{
+    Fulltime,
+    Parttime,
+    Seasonal,
+    Contract
+}
+type Employee{
+    _id : String,
+    fname : String!,
+    lname : String!,
+    age: Int!,
+    date_of_joining: GraphqlDate!,
+    title: Title!,
+    department: Department!,
+    employee_type: EmployeeType!,
+    current_status: Int!,
+}
+input EmployeeUpdate{
+    _id: ID!,
+    fname: String!,
+    lname: String!,
+    age: Int!,
+    date_of_joining: GraphqlDate!,
+    title: Title!,
+    department: Department!,
+    employee_type: EmployeeType!,
+    current_status: Int!,
+}
+input EmployeeInput{
+    fname : String!,
+    lname : String!,
+    age: Int!,
+    date_of_joining: GraphqlDate!,
+    title: Title!,
+    department: Department!,
+    employee_type: EmployeeType!
+}
+type Query {
+    employees: [Employee!]!,
+    employee(id: String!): Employee!, 
+}
+type Mutation {
+    createEmployee(employee : EmployeeInput!) : Int!
+    updateEmployeeData(id: String!,employee : EmployeeUpdate!) : Int!
+    deleteEmployeeData(id: String!) : Int!
+}
